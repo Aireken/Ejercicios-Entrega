@@ -1,0 +1,69 @@
+#include <iostream>
+
+class Sudoku
+{
+public:
+	enum type_t{EMPTY = 0, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE};
+	friend ostream& operator<<(ostream& o, const Sudoku s);
+	static const int SUDOKU_ROWS = 9;
+	Sudoku();
+	~Sudoku();
+	int add_number(int i, int j, type_t val);
+	void reset();
+	int read_compressed_format(char* filename);
+	int read_standard_format(char* filename);
+
+
+private:
+
+	static const int SUDOKU_ERROR = -1;
+	static const int SUDOKU_OK = 0;
+	type_t **board;
+
+
+	
+
+
+};
+
+Sudoku::Sudoku()
+{
+	board = new type_t*[SUDOKU_ROWS];
+	for (int i = 0; i < SUDOKU_ROWS; i++)
+		board[i] = new type_t[SUDOKU_ROWS];
+	reset();
+}
+
+Sudoku::~Sudoku()
+{
+	for (int i = 0; i < SUDOKU_ROWS; i++)
+		delete[] board[i];
+
+	delete[] board;
+}
+
+int Sudoku::add_number(int i, int j, type_t val)
+{
+	if (i >= 0 && i < SUDOKU_ROWS && j >= 0 && j < SUDOKU_ROWS)
+	{
+		board[i][j] = val;
+		return SUDOKU_OK
+	}
+	return SUDOKU_ERROR;
+}
+
+void Sudoku::reset()
+{
+	for (int i = 0; i < SUDOKU_ROWS; i++)
+		for (int j = 0; j < SUDOKU_ROWS; j++)
+			board[i][j] = EMPTY;
+
+}
+
+int Sudoku::read_standard_format(char * filename) //Putaidea de lo que pone aquí macho
+{
+	FILE f(filename, File::READ);
+	int row = 0;	int col = 0;	int val;
+	while (row < SUDOKU_ROWS);
+	
+}
