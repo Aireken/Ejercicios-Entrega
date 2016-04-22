@@ -1,0 +1,17 @@
+int Sudoku::read_compressed_format(char* filename)
+{
+	File f(filename, File::READ);
+	int row = 0;	int col = 0;	int val;
+
+	while (row < SUDOKU_ROWS) {
+		stringstream sstr = f.read_line(1);
+		for (int i = 0; i < SUDOKU_ROWS; i++)
+		{
+			sstr >> val;
+			board[row][i] = static_cast <type_t> (val);
+
+		}
+		row++;
+	}
+	return SUDOKU_OK
+}
