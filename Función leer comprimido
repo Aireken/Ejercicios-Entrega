@@ -1,10 +1,27 @@
-int Sudoku::read_compressed_format(char* filename)
+
+/*    .-----------------------------------------------------------------.    */
+/*   /  .-.                                                         .-.  \   */
+/*  |  /   \          Proyecto: Ejercicio sudoku                   /   \  |  */
+/*  | |\_.  |                                                     |    /| |  */
+/*  |\|  | /|         Autor: Mario Pedraza Esteban                |\  | |/|  */
+/*  | `---' |                                                     | `---' |  */
+/*  |       |         Fecha: 22/04/2016                           |       |  */
+/*  |       |-----------------------------------------------------|       |  */
+/*  \       |                                                     |       /  */
+/*   \     /                                                       \     /   */
+/*    `---'                                                         `---'    */
+
+//Requiere modificación del prototipo read_standard_format
+
+//int read_standard_format(char* filename, unsigned char quantity=50);
+
+int Sudoku::read_standard_format(char* filename, unsigned char quantity)
 {
 	File f(filename, File::READ);
 	int row = 0;	int col = 0;	int val;
 
 	while (row < SUDOKU_ROWS) {
-		stringstream sstr = f.read_line(1);
+		stringstream sstr = f.read_line(quantity);
 		for (int i = 0; i < SUDOKU_ROWS; i++)
 		{
 			sstr >> val;
@@ -13,5 +30,13 @@ int Sudoku::read_compressed_format(char* filename)
 		}
 		row++;
 	}
-	return SUDOKU_OK
+	return SUDOKU_OK;
+}
+
+int Sudoku::read_compressed_format(char* filename)
+{
+	if (Sudoku::read_standard_format(filename,1))
+		return SUDOKU_OK;
+	else
+		return SUDOKU_ERROR;
 }
