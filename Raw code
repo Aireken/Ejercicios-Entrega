@@ -63,7 +63,7 @@ void Sudoku::reset()
 
 }
 
-int Sudoku::read_compressed_format(char* filename)
+int Sudoku::read_standard_format(char* filename)
 {
 	File f(filename, File::READ);
 	int row = 0;	int col = 0;	int val;
